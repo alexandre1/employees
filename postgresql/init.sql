@@ -7,6 +7,7 @@ CREATE TABLE person (
   birth_day timestamp,
   email varchar(255) not null,
   name varchar(50) not null,
+  version int(4),
   phone_number varchar(255)
  );
 
