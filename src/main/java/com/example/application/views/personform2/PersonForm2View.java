@@ -25,24 +25,19 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 @PageTitle("Person Form2")
 @Route(value = "person-form2", layout = MainLayout.class)
 @Uses(Icon.class)
 public class PersonForm2View extends Composite<VerticalLayout> {
 
-    public PersonForm2View() {
+    public PersonForm2View(@Autowired SamplePersonService samplePersonService) {
         VerticalLayout layoutColumn2 = new VerticalLayout();
+        this.samplePersonService = samplePersonService;
         H3 h3 = new H3();
         FormLayout formLayout2Col = new FormLayout();
         TextField textField = new TextField();
-        TextField textField2 = new TextField();
-        DatePicker datePicker = new DatePicker();
-        TextField textField3 = new TextField();
-        EmailField emailField = new EmailField();
-        TextField textField4 = new TextField();
-        HorizontalLayout layoutRow = new HorizontalLayout();
-        Button buttonPrimary = new Button();
-        Button buttonSecondary = new Button();
         Grid basicGrid = new Grid(SamplePerson.class);
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
@@ -55,19 +50,6 @@ public class PersonForm2View extends Composite<VerticalLayout> {
         h3.setWidth("100%");
         formLayout2Col.setWidth("100%");
         textField.setLabel("First Name");
-        textField2.setLabel("Last Name");
-        datePicker.setLabel("Birthday");
-        textField3.setLabel("Phone Number");
-        emailField.setLabel("Email");
-        textField4.setLabel("Occupation");
-        layoutRow.addClassName(Gap.MEDIUM);
-        layoutRow.setWidth("100%");
-        layoutRow.getStyle().set("flex-grow", "1");
-        buttonPrimary.setText("Save");
-        buttonPrimary.setWidth("min-content");
-        buttonPrimary.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonSecondary.setText("Cancel");
-        buttonSecondary.setWidth("min-content");
         basicGrid.setWidth("100%");
         basicGrid.getStyle().set("flex-grow", "0");
         setGridSampleData(basicGrid);
@@ -75,21 +57,24 @@ public class PersonForm2View extends Composite<VerticalLayout> {
         layoutColumn2.add(h3);
         layoutColumn2.add(formLayout2Col);
         formLayout2Col.add(textField);
-        formLayout2Col.add(textField2);
-        formLayout2Col.add(datePicker);
-        formLayout2Col.add(textField3);
-        formLayout2Col.add(emailField);
-        formLayout2Col.add(textField4);
-        layoutColumn2.add(layoutRow);
-        layoutRow.add(buttonPrimary);
-        layoutRow.add(buttonSecondary);
         getContent().add(basicGrid);
     }
 
     private void setGridSampleData(Grid grid) {
+        System.out.println("test 1");
+        System.out.println("list :  " + samplePersonService.list().size());
         grid.setItems(query -> samplePersonService.list(
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
+    }
+
+    public SamplePersonService getSamplePersonService() {
+        return samplePersonService;
+    }
+
+    public void setSamplePersonService(SamplePersonService samplePersonService) {
+        System.out.println("test service ok");
+        this.samplePersonService = samplePersonService;
     }
 
     @Autowired()

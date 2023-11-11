@@ -2,6 +2,8 @@ package com.example.application.services;
 
 import com.example.application.data.SamplePerson;
 import com.example.application.data.SamplePersonRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +35,13 @@ public class SamplePersonService {
         return repository.findAll(pageable);
     }
 
+    public List<SamplePerson> list() {
+        return this.repository.findAll();
+    }
+
     public Page<SamplePerson> list(Pageable pageable, Specification<SamplePerson> filter) {
+        SamplePerson p = (SamplePerson) filter;
+        System.out.println(p.getName());
         return repository.findAll(filter, pageable);
     }
 

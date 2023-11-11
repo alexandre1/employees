@@ -106,8 +106,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Hello World", LineAwesomeIcon.GLOBE_SOLID.create(), HelloWorldView.class), //
 
                 new MenuItemInfo("Person Form2", LineAwesomeIcon.USER.create(), PersonForm2View.class), //
-
-                new MenuItemInfo("Chat", LineAwesomeIcon.COMMENTS.create(), ChatView.class), //
+                
 
         };
     }

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: my-app2
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: my-app2
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app2
     spec:
       containers:
-        - name: my-app
-          image: my-app:latest
+        - name: my-app2
+          image: my-app2:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
@@ -28,13 +28,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-balancer
+  name: my-app2-balancer
 spec:
   selector:
-    app: my-app
+    app: my-app2
   ports:
     - protocol: TCP
-      port: 8000 # The port to expose to the outside
+      port: 9090 # The port to expose to the outside
       targetPort: 8080 # The port the application is running on in the pods
   type: LoadBalancer
   sessionAffinity: ClientIP
