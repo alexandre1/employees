@@ -51,7 +51,7 @@ To build the Dockerized version of the project, run
 
 ```
 mvn clean package -Pproduction
-docker build . -t my-app:latest
+docker build . -t my-app2:latest
 ```
 
 Once the Docker image is correctly built, you can test it locally using
